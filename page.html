@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Introduction to Artificial Intelligence</title>
+    <title>Escape the House: Yes or No</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    This is sample text.
+    <h1>Escape the House</h1>
+    <div id="game">
+        <p id="question">You wake up. Do you get out of bed?</p>
+        <button onclick="answer('yes')">Yes</button>
+        <button onclick="answer('no')">No</button>
+    </div>
+    <!-- Secret clickable area -->
+    <div id="secret" style="position:fixed;bottom:0;right:0;width:40px;height:40px;opacity:0;cursor:pointer;z-index:1000;"></div>
+    <script>
+        const questions = {
+            start: {
+                text: "You wake up to the sound of a creaking floorboard. Do you get out of bed?",
+                yes: "q1",
+                no: "end1"
+            },
+            q1: {
+                text: "You hear footsteps outside your room. Do you open the door?",
+                yes: "q2",
+                no: "q3"
+            },
+            q2: {
+                text: "A dangerous-looking stranger is in the hallway. Do you scream out to them?",
+                yes: "end2",
+                no: "q4"
+            },
+            q3: {
+                text: "You hide under the bed. The footsteps stop at your door. Do you stay hidden?",
+                yes: "end3",
+                no: "end4"
+            },
+            q4: {
+                text: "You quietly sneak past the stranger. Do you head for the front door?",
+                yes: "end5",
+                no: "end6"
+            },
+            end1: {
+                text: "Ending 1: You stay in bed. The stranger eventually finds you. Bad ending. Refresh to try again.",
+                yes: null,
+                no: null
+            },
+            end2: {
+                text: "Ending 2: The stranger attacks you. Bad ending. Refresh to try again.",
+                yes: null,
+                no: null
+            },
+            end3: {
+                text: "Ending 3: You stay hidden until the stranger leaves. You call the police to report the stolen property. Good ending. Refresh to play again.",
+                yes: null,
+                no: null
+            },
+            end4: {
+                text: "Ending 4: You make a noise and the stranger finds you. Bad ending. Refresh to try again.",
+                yes: null,
+                no: null
+            },
+            end5: {
+                text: "Ending 5: You escape through the front door! Good ending. Refresh to play again.",
+                yes: null,
+                no: null
+            },
+            end6: {
+                text: "Ending 6: You're too scared to think straight and the stranger catches you. Bad ending. Refresh to try again.",
+                yes: null,
+                no: null
+            },
+            secret: {
+                text: "Secret Ending: You jump out the window and escape! You broke your leg, but you walk far enough to reach your neighbor's house. Refresh to play again.",
+                yes: null,
+                no: null
+            }
+        };
+
+        let current = 'start';
+        function answer(choice) {
+            const next = questions[current][choice];
+            if (next && questions[next]) {
+                document.getElementById('question').textContent = questions[next].text;
+                current = next;
+                if (!questions[next].yes && !questions[next].no) {
+                    document.querySelectorAll('#game button').forEach(btn => btn.style.display = 'none');
+                }
+            }
+        }
+
+        // Secret ending trigger
+        document.getElementById('secret').addEventListener('click', function() {
+            document.getElementById('question').textContent = questions.secret.text;
+            document.querySelectorAll('#game button').forEach(btn => btn.style.display = 'none');
+        });
+    </script>
 </body>
