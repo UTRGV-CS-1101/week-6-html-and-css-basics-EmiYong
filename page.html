@@ -1,99 +1,155 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Escape the House: Yes or No</title>
+    <title>My Interests & Passions</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Escape the House</h1>
-    <div id="game">
-        <p id="question">You wake up. Do you get out of bed?</p>
-        <button onclick="answer('yes')">Yes</button>
-        <button onclick="answer('no')">No</button>
-    </div>
-    <!-- Secret clickable area -->
-    <div id="secret" style="position:fixed;bottom:0;right:0;width:40px;height:40px;opacity:0;cursor:pointer;z-index:1000;"></div>
-    <script>
-        const questions = {
-            start: {
-                text: "You wake up to the sound of a creaking floorboard. Do you get out of bed?",
-                yes: "q1",
-                no: "end1"
-            },
-            q1: {
-                text: "You hear footsteps outside your room. Do you open the door?",
-                yes: "q2",
-                no: "q3"
-            },
-            q2: {
-                text: "A dangerous-looking stranger is in the hallway. Do you scream out to them?",
-                yes: "end2",
-                no: "q4"
-            },
-            q3: {
-                text: "You hide under the bed. The footsteps stop at your door. Do you stay hidden?",
-                yes: "end3",
-                no: "end4"
-            },
-            q4: {
-                text: "You quietly sneak past the stranger. Do you head for the front door?",
-                yes: "end5",
-                no: "end6"
-            },
-            end1: {
-                text: "Ending 1: You stay in bed. The stranger eventually finds you. Bad ending. Refresh to try again.",
-                yes: null,
-                no: null
-            },
-            end2: {
-                text: "Ending 2: The stranger attacks you. Bad ending. Refresh to try again.",
-                yes: null,
-                no: null
-            },
-            end3: {
-                text: "Ending 3: You stay hidden until the stranger leaves. You call the police to report the stolen property. Good ending. Refresh to play again.",
-                yes: null,
-                no: null
-            },
-            end4: {
-                text: "Ending 4: You make a noise and the stranger finds you. Bad ending. Refresh to try again.",
-                yes: null,
-                no: null
-            },
-            end5: {
-                text: "Ending 5: You escape through the front door! Good ending. Refresh to play again.",
-                yes: null,
-                no: null
-            },
-            end6: {
-                text: "Ending 6: You're too scared to think straight and the stranger catches you. Bad ending. Refresh to try again.",
-                yes: null,
-                no: null
-            },
-            secret: {
-                text: "Secret Ending: You jump out the window and escape! You broke your leg, but you walk far enough to reach your neighbor's house. Refresh to play again.",
-                yes: null,
-                no: null
-            }
-        };
+    <header>
+        <h1>My Interests & Passions</h1>
+        <p class="tagline">A showcase of what I love</p>
+    </header>
 
-        let current = 'start';
-        function answer(choice) {
-            const next = questions[current][choice];
-            if (next && questions[next]) {
-                document.getElementById('question').textContent = questions[next].text;
-                current = next;
-                if (!questions[next].yes && !questions[next].no) {
-                    document.querySelectorAll('#game button').forEach(btn => btn.style.display = 'none');
-                }
+    <nav class="tabs" role="tablist" aria-label="Main tabs">
+        <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab(event, 'hobbies')">Hobbies</button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(event, 'sports')">Game Tournaments</button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(event, 'games')">Games</button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(event, 'music')">Music</button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(event, 'career')">Career</button>
+    </nav>
+
+    <main>
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="tab-content active">
+            <h2>My Hobbies</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Drawing & Design</h3>
+                    <p>Creative expression through digital and traditional art forms.</p>
+                </div>
+                <div class="card">
+                    <h3>Gaming</h3>
+                    <p>Both casual and competitive gaming I enjoy strategy, teamwork, and community tournaments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Tournaments Section -->
+        <section id="sports" class="tab-content">
+            <h2>Game Tournaments</h2>
+            <div class="hero-card">
+                <h3>Esports & Competitive Events</h3>
+                <p>I enjoy watching and participating in tournaments  from local LANs to online leagues. The strategy and teamwork shine in a competitive setting.</p>
+                <ul>
+                    <li>Regional and online tournaments</li>
+                    <li>Team strategy and communication</li>
+                    <li>Competitive spirit and community events</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="tab-content">
+            <h2>My Favorite Video Games</h2>
+            <div class="cards">
+                <div class="card game-card">
+                    <h3>Overwatch</h3>
+                    <p>Team-based hero shooter with fast-paced objective play and teamwork-focused mechanics.</p>
+                </div>
+                <div class="card game-card">
+                    <h3>The Last of Us</h3>
+                    <p>Gripping story-driven adventure with intense gameplay and emotional depth.</p>
+                </div>
+                <div class="card game-card">
+                    <h3>Deadlock</h3>
+                    <p>Fast-paced competitive gameplay with strategic depth and dynamic team combat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section id="music" class="tab-content">
+            <h2>Music I Enjoy</h2>
+            <div class="music-list">
+                <div class="music-item">
+                    <span class="genre">Indie Pop</span>
+                    
+                </div>
+                <div class="music-item">
+                    <span class="genre">Dream Pop</span>
+                   
+                </div>
+                <div class="music-item">
+                    <span class="genre">Alternative Rock</span>
+                 
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Section -->
+        <section id="career" class="tab-content">
+            <h2>My Future Goals</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Year 1: Master Fundamentals</h3>
+                    <p>Build strong programming skills and understand core computer science concepts.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Year 2-3: Specialize & Build</h3>
+                    <p>Focus on a specific area (Web Dev, AI, or Game Dev) and create portfolio projects.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Graduation: Enter Tech Industry</h3>
+                    <p>Land a role at an innovative company working on meaningful projects.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Long-term: Impact</h3>
+                    <p>Create technology that makes a positive difference in people's lives.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>This page represents who I am</p>
+    </footer>
+
+    <script>
+        function showTab(evt, tabName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.tab-content');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active class and aria-selected from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            // Show selected section and highlight button
+            const section = document.getElementById(tabName);
+            if (section) section.classList.add('active');
+
+            // Mark clicked button active and update aria-selected
+            const btn = evt.currentTarget || evt.target;
+            if (btn) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                btn.focus();
             }
         }
 
-        // Secret ending trigger
-        document.getElementById('secret').addEventListener('click', function() {
-            document.getElementById('question').textContent = questions.secret.text;
-            document.querySelectorAll('#game button').forEach(btn => btn.style.display = 'none');
+        // Add smooth scroll behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
         });
     </script>
 </body>
